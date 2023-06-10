@@ -24,7 +24,15 @@ router.post("/signup", validateSignUp, userAlreadyExists, async (req, res) => {
     //for each user -> save the role id of user
     user.roles = [await (await Role.findOne({ name: "user" }))._id];
     await user.save();
-    return res.json({ message: "user saved", id: user._id });
+    const token = jwt.sign({ id: user.id }, authConfig.secret, {
+      expiresIn: "4h",
+    });
+    return res.status(200).json({
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      accessToken: token,
+    });
   } catch (e) {
     return res.status(500).json({ message: "Server DB Error", error: e });
   }
