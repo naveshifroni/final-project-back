@@ -60,7 +60,7 @@ router.post("/signin", validateSignIn, async (req, res) => {
     }
 
     const token = jwt.sign({ id: user.id }, authConfig.secret, {
-      expiresIn: "30d",
+      expiresIn: "4h",
     });
 
     const authorities = [];

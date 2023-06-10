@@ -21,7 +21,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZTI0ZThiY2M4MmU5
 
 
 ### POST to add a card:
-POST http://localhost:3001/api/cards
+POST http://localhost:3001/api/app
 Content-Type: application/json
 
 {

@@ -9,4 +9,4 @@ const schema = new Schema({
   followers: Boolean,
 });
 
-export { schema as appSettingsSchema };
+export { schema as appsetSchema };

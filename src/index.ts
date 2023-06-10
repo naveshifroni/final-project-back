@@ -5,7 +5,7 @@ import { connect } from "./db/connect.js";
 import { notFound } from "./middleware/not-found.js";
 import { booksRouter } from "./routes/books.js";
 import { cardsRouter } from "./routes/cards.js";
-import { appSettingsRouter } from "./routes/appSettings.js";
+import { appsetRouter } from "./routes/appSettings.js";
 import { authRouter } from "./routes/users.js";
 
 const app = express();
@@ -28,7 +28,7 @@ app.use(morgan("dev"));
 //routes:
 app.use("/api/books", booksRouter);
 app.use("/api/cards", cardsRouter);
-app.use("/api/app", appSettingsRouter);
+app.use("/api/app", appsetRouter);
 app.use("/api/auth", authRouter);
 
 //404:
