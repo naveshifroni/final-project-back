@@ -6,6 +6,7 @@ import { notFound } from "./middleware/not-found.js";
 import { booksRouter } from "./routes/books.js";
 import { cardsRouter } from "./routes/cards.js";
 import { appsetRouter } from "./routes/appSettings.js";
+import { addappRouter } from "./routes/addapp.js";
 import { authRouter } from "./routes/users.js";
 
 const app = express();
@@ -29,6 +30,7 @@ app.use(morgan("dev"));
 app.use("/api/books", booksRouter);
 app.use("/api/cards", cardsRouter);
 app.use("/api/app", appsetRouter);
+app.use("/api/add", addappRouter);
 app.use("/api/auth", authRouter);
 
 //404:

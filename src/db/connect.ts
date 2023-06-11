@@ -13,7 +13,6 @@ const connect = async () => {
 };
 
 const initDB = () => {
-  
   //save without joi
   //create the User/Admin/Mod roles
   //if Role collection is Empty:
@@ -32,21 +31,4 @@ const initDB = () => {
   });
 };
 
-const initDB2 = async () => {
-  try {
-    
-    const count = await Role.estimatedDocumentCount();
-    if (count === 0) {
-      const roles = ROLES.map((r) => new Role({ name: r }));
-
-      //dont use forEach with await
-      for (let role of roles) {
-        await role.save();
-        console.log("added ", role.name, "to Roles collection");
-      }
-    }
-  } catch (e) {
-    console.log("Failed with error: ", e);
-  }
-};
 export { connect };
