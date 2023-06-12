@@ -9,7 +9,10 @@ router.get("/", async (req, res) => {
   //TODO: handle errors:
   try {
     const appsChosen = await Addapp.find();
-    res.json(appsChosen);
+    console.log(appsChosen);
+    const arr = appsChosen[0].chosen ?? [];
+    console.log(arr);
+    res.json(arr);
   } catch (e) {
     res.status(500).json({ message: "Error", error: e });
   }

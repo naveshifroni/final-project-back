@@ -13,8 +13,11 @@ const router = Router();
 
 //api/auth/signup
 router.post("/signup", validateSignUp, userAlreadyExists, async (req, res) => {
+  console.log(req);
   const body = _.pick(req.body, "username", "email", "password");
-
+  const role = req.body.role ?? "user";
+  console.log(role);
+  console.log(req.body);
   body.password = await bcrypt.hash(body.password, 12);
   const user = new User(body);
 
@@ -22,7 +25,16 @@ router.post("/signup", validateSignUp, userAlreadyExists, async (req, res) => {
 
   try {
     //for each user -> save the role id of user
-    user.roles = [await (await Role.findOne({ name: "user" }))._id];
+    if (role === "user" || "") {
+      user.roles = [await (await Role.findOne({ name: "user" }))._id];
+    }
+    if (role === "moderator") {
+      user.roles = [await (await Role.findOne({ name: "moderator" }))._id];
+    }
+    if (role === "admin") {
+      user.roles = [await (await Role.findOne({ name: "admin" }))._id];
+    }
+
     await user.save();
     const token = jwt.sign({ id: user.id }, authConfig.secret, {
       expiresIn: "4h",
