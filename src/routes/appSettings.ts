@@ -23,11 +23,7 @@ router.get("/abc", (req, res) => {
 
 //POST a student:
 router.post("/", async (req, res) => {
-  console.log(req.body);
-  console.log("hi");
   const app = req.body.app;
-  console.log("app");
-  console.log(app);
 
   const newAppset = new Appset({
     title: app.title,
@@ -40,9 +36,8 @@ router.post("/", async (req, res) => {
 
   try {
     const appsCh = await Appset.find();
-    console.log(appsCh);
     const mapped = appsCh.map((a) => a.title);
-    console.log(mapped);
+
     if (!mapped.includes(app.title)) {
       newAppset.save();
     } else if (mapped.includes(app.title)) {

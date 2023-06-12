@@ -47,8 +47,6 @@ router.post("/signup", validateSignUp, userAlreadyExists, async (req, res) => {
       accessToken: token,
     });
   } catch (e) {
-    console.log("error!!!");
-    console.log(e);
     return res.status(500).json({ message: "Server DB Error", error: e });
   }
 });
