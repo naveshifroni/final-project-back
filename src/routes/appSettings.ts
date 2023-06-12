@@ -15,9 +15,9 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/abc", (req, res) => {
+router.get("/", (req, res) => {
   Appset.find()
-    .then((students) => res.json(students))
+    .then((settings) => res.json(settings))
     .catch((e) => res.status(500).json({ message: "Error", error: e }));
 });
 
