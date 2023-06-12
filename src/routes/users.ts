@@ -43,6 +43,7 @@ router.post("/signup", validateSignUp, userAlreadyExists, async (req, res) => {
       id: user.id,
       username: user.username,
       email: user.email,
+      roleId: user.roles[0]._id,
       accessToken: token,
     });
   } catch (e) {
