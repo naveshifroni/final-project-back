@@ -26,7 +26,9 @@ router.post("/", async (req, res) => {
   console.log(req.body);
   console.log("hi");
   const app = req.body.app;
+  console.log("app");
   console.log(app);
+
   const newAppset = new Appset({
     title: app.title,
     notifications: app.notifications,
@@ -37,8 +39,27 @@ router.post("/", async (req, res) => {
   });
 
   try {
-    const result = await newAppset.save();
-    res.json({ message: "App settings Saved", id: result.id });
+    const appsCh = await Appset.find();
+    console.log(appsCh);
+    const mapped = appsCh.map((a) => a.title);
+    console.log(mapped);
+    if (!mapped.includes(app.title)) {
+      newAppset.save();
+    } else if (mapped.includes(app.title)) {
+      const appsSet = await Appset.updateOne(
+        { title: app.title },
+        {
+          $set: {
+            notifications: app.notifications,
+            inbox: app.inbox,
+            publish: app.publish,
+            following: app.following,
+            followers: app.followers,
+          },
+        }
+      );
+    }
+    res.status(200).json("halleluya");
   } catch (e) {
     res.status(500).json({ message: "Error", error: e });
   }
