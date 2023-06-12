@@ -4,6 +4,6 @@ const urlRegex =
 const phoneRegex = /^\d{2,3}-\d{7}$/;
 
 const passwordRegex =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{3,30}$/;
 
 export { urlRegex, phoneRegex, passwordRegex };
