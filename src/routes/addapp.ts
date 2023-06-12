@@ -1,7 +1,5 @@
 import { Router } from "express";
 import { Addapp } from "../db/models/addapp.js";
-import mongoose from "mongoose";
-import { ObjectId } from "mongodb";
 
 const router = Router();
 
@@ -9,7 +7,6 @@ router.get("/", async (req, res) => {
   //TODO: handle errors:
   try {
     const appsChosen = await Addapp.find().then((chosen) => {
-      console.log(chosen);
       if (chosen.length === 0) {
         res.json([]);
       } else {
@@ -26,8 +23,6 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   const apps = req.body.apps ?? [];
   const id = req.body.id ?? "";
-  console.log(id);
-  /*  const objectId = new ObjectId(id); */
   const newAddApp = new Addapp({
     title: "apps",
     chosen: apps,
@@ -35,7 +30,6 @@ router.post("/", async (req, res) => {
 
   try {
     const appsCh = await Addapp.find();
-    console.log(appsCh);
     if (appsCh.length === 0) {
       newAddApp.save();
     }
@@ -45,8 +39,6 @@ router.post("/", async (req, res) => {
         { $set: { chosen: apps } }
       );
     }
-
-    console.log("");
 
     res.json({ message: "Apps Saved" });
   } catch (e) {

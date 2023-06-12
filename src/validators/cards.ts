@@ -9,6 +9,5 @@ const schema = joi.object({
   image: joi.string().regex(urlRegex),
   phone: joi.string().regex(phoneRegex).required(),
 });
-console.log("hello");
 
 export { schema as cardSchema };

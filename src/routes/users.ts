@@ -13,11 +13,9 @@ const router = Router();
 
 //api/auth/signup
 router.post("/signup", validateSignUp, userAlreadyExists, async (req, res) => {
-  console.log(req);
   const body = _.pick(req.body, "username", "email", "password");
   const role = req.body.role ?? "user";
-  console.log(role);
-  console.log(req.body);
+
   body.password = await bcrypt.hash(body.password, 12);
   const user = new User(body);
 
